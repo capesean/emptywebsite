@@ -1,0 +1,52 @@
+﻿<div>
+    <form name="mainForm" ng-submit="vm.save()" novalidate>
+
+        <fieldset class="group" ng-disabled="vm.loading">
+
+            <legend>Settings</legend>
+
+            <div class="row">
+
+                <!--<div class="col-sm-6 col-md-4">
+                    <div class="form-group" ng-class="{ 'has-error':  mainForm.$submitted && mainForm.finalPerspectiveId.$invalid }">
+                        <label for="name" class="control-label">
+                            Final Perspective Id:
+                        </label>
+                        <input type="text" id="finalPerspectiveId" name="finalPerspectiveId" ng-model="vm.settings.finalPerspectiveId" maxlength="50" class="form-control" ng-required="true" />
+                    </div>
+                </div>-->
+
+            </div>
+
+        </fieldset>
+
+        <div class="form-group error-messages has-error alert alert-danger" ng-if="mainForm.$submitted && mainForm.$invalid">
+
+            <span class="help-block has-error"
+                  ng-if="mainForm.$submitted">
+                <span>
+                    Please correct the following errors:
+                </span>
+            </span>
+
+            <ul>
+
+                <!--<li class="help-block has-error"
+                    ng-if="mainForm.$submitted"
+                    ng-messages="mainForm.finalPerspectiveId.$error">
+                    <span ng-message="required">
+                        Final Perspective Id is required.
+                    </span>
+                </li>-->
+
+            </ul>
+
+        </div>
+
+        <fieldset ng-disabled="vm.loading">
+            <button type="submit" class="btn btn-success">Save<i class="fa fa-check ml-1"></i></button>
+        </fieldset>
+
+    </form>
+
+</div>

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+
+    <title>@ViewBag.SiteName</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+
+    <base href="/">
+
+    @Styles.Render("~/content/main")
+
+</head>
+
+<body ng-controller="masterPageController as vm" class="loading bg-faded">
+
+    <nav class="navbar navbar-expand-md navbar-light mb-2">
+        <a class="navbar-brand" href="/"><img src="images/logosmall.png" alt="@ViewBag.SiteName" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown" ng-if="vm.isAdministrator">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i>Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        @*
+                            add your links here
+                        *@
+                        <a class="dropdown-item" href="/users"><i class="fa fa-user fa-fw"></i><span class="menuLabel">Users</span></a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i><span class="hidden-xs visible-sm-inline-block visible-md-inline-block visible-lg-inline-block inline-block">{{vm.profile.firstName}}<span class="hidden-xs"> {{vm.profile.lastName}}</span></span></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/changepassword"><i class="fa fa-lock fa-fw"></i>Change Password</a>
+                        <a class="dropdown-item" href="/logout" ng-click="$event.preventDefault();vm.logout()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid" id="bodyContent">
+        <div class="row">
+
+            <main class="col">
+
+                <ol id="breadcrumb" ncy-breadcrumb max-length="23">&nbsp;</ol>
+
+                <div ng-cloak ui-view>
+                    @RenderBody()
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <div id="loadingSplash" class="row">
+
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 mx-auto">
+            <section id="logoLink">
+
+                <img src="images/logo.png" alt="@ViewBag.SiteName" class="d-block mx-auto mb-3">
+                <div class="loader d-block mx-auto my-5"></div>
+
+            </section>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/scripts/main")
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

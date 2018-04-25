@@ -1,0 +1,10 @@
+﻿<div ng-class="{'input-group': !ngDisabled}">
+    <input type="hidden" name="ngModel" id="ngModel" ng-model="ngModel" />
+    <input typeof="text" name="user" id="user" placeholder="{{placeholder}}" ng-click="selectUser()" type="text"
+           class="form-control readonly clickable" readonly="readonly" value="{{user.fullName}}" ng-disabled="ngDisabled" />
+    <span class="input-group-btn" ng-if="!ngDisabled">
+        <button type="button" class="btn btn-default" ng-click="selectUser()">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>

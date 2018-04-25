@@ -1,0 +1,89 @@
+﻿@using WEB.Models
+@model LoginViewModel
+
+@using (Html.BeginForm("Login", "Account", new { }, FormMethod.Post, new { @class = "form-signin mb-5" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="text-center mb-4">
+        <img src="images/logo.png" class="mb-4" alt="@ViewBag.SiteName" />
+        <h1 class="h3 mb-3 font-weight-normal">@ViewBag.SiteName</h1>
+    </div>
+
+    if (ViewData.ModelState.Values.Any(o => o.Errors.Any()))
+    {
+        <div class="mb-4">
+            <ul class="list-group">
+                @foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        <li class="list-group-item list-group-item-danger">@error.ErrorMessage</li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="form-label-group mb-0 login-top">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address", required = "", autofocus = "" })
+        <label for="Email">Email address</label>
+    </div>
+
+    <div class="form-label-group mt-0 login-bottom">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "" })
+        <label for="Password">Password</label>
+    </div>
+
+    <input id="loginButton" type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" />
+
+    <div class="small mt-2 text-right">
+        <a href="/resetpassword">reset password</a>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            $('form').submit(function () {
+                $('input[type=submit]').prop('disabled', true);
+                $('input[type=text]').prop('readonly', true).addClass('disabled').attr('autocomplete', 'off');
+                $('input[type=password]').prop('readonly', true).addClass('disabled').attr('autocomplete', 'off');
+            });
+        });
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": 300,
+            "hideDuration": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000,
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script>
+    @if (Request.QueryString["msg"] == "tokensent")
+    {
+        <script>
+            toastr.success("A password reset token has been sent to your email address", "Password Reset");
+        </script>
+    }
+    else if (Request.QueryString["msg"] == "passwordchanged")
+    {
+        <script>
+            toastr.success("Your password has been changed", "Set Password");
+        </script>
+    }
+    else if (Request.QueryString["msg"] == "loggedout")
+    {
+        <script>
+            toastr.success("You have successfully logged out", "Log Out");
+        </script>
+    }
+
+}

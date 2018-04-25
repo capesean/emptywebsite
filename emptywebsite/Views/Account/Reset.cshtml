@@ -1,0 +1,51 @@
+﻿@using WEB.Models
+@model ResetViewModel
+
+@using (Html.BeginForm("Reset", "Account", new { }, FormMethod.Post, new { @class = "form-signin mb-5" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="text-center mb-4">
+        <img src="images/logo.png" class="mb-4" alt="@ViewBag.SiteName" />
+        <h1 class="h3 mb-3 font-weight-normal">@ViewBag.SiteName</h1>
+    </div>
+
+    if (ViewData.ModelState.Values.Any(o => o.Errors.Any()))
+    {
+        <div class="mb-4">
+            <ul class="list-group">
+                @foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        <li class="list-group-item list-group-item-danger">@error.ErrorMessage</li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="form-label-group mb-0 login-top">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email address", required = "", autofocus = "" })
+        <label for="Email">Email address</label>
+    </div>
+
+    <div class="form-label-group mt-0 mb-0 login-middle">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "" })
+        <label for="Password">Password</label>
+    </div>
+
+    <div class="form-label-group mt-0 login-bottom">
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm password", required = "" })
+        <label for="ConfirmPassword">Confirm password</label>
+    </div>
+
+    @Html.HiddenFor(m => m.Token)
+
+    <input id="loginButton" type="submit" class="btn btn-lg btn-primary btn-block" value="Set password" />
+
+    <div class="small mt-2 text-right">
+        <a href="/login">return to login</a>
+    </div>
+
+}

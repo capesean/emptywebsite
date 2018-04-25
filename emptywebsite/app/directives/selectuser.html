@@ -1,0 +1,94 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Select {{vm.singular}}</h3>
+</div>
+<div class="modal-body pb-2">
+
+    <form ng-submit="vm.runUserSearch(0)" novalidate>
+
+        <fieldset ng-disabled="vm.loading">
+
+            <div class="alert alert-info alert-dismissible" ng-if="vm.options.project"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Filtered to the {{vm.options.project.name}} project team</div>
+
+            <div class="row">
+
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="form-group">
+                        <input type="search" id="q" ng-model="vm.search.q" max="100" class="form-control" placeholder="Search {{vm.plural.toLowerCase()}}" autofocus />
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3 col-lg-2">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="current" name="current" ng-model="vm.search.current" />
+                                Current
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="subconsultants" name="subconsultants" ng-model="vm.search.subconsultants" />
+                                Include Service Providers
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-2 col-lg-1">
+
+                    <button type="submit" class="btn btn-success">Search<i class="fa fa-search ml-1"></i></button>
+
+                </div>
+
+            </div>
+
+        </fieldset>
+
+    </form>
+
+    <fieldset ng-disabled="vm.loading">
+
+        <table class="table table-striped table-hover table-bordered table-condensed row-navigation" ng-class="{ 'disabled': vm.loading }">
+            <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in vm.users" ng-click="vm.select(user)">
+                    <td>{{ user.code }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td><i ng-class="{ 'invisible': !vm.isSelected(user) }" class="fa fa-check check-mark pull-right"></i>{{ user.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row" ng-class="{ 'disabled': vm.loading }">
+            <div class="col-sm-7">
+                <ix-pager headers="vm.userHeaders" callback="vm.runUserSearch"></ix-pager>
+            </div>
+            <div class="col-sm-5 text-right resultsInfo">
+                <ix-pager-info headers="vm.userHeaders"></ix-pager-info>
+            </div>
+        </div>
+
+    </fieldset>
+
+</div>
+
+<div class="modal-footer">
+    <fieldset ng-disabled="vm.loading">
+        <!--<span class="btn btn-info">{{vm.selectedUsers.length}} User<span ng-if="vm.selectedUsers.length > 1">s</span> selected</span>-->
+        <!--<span class="btn btn-info">{{vm.selectedUsers.length}} User<span ng-if="vm.selectedUsers.length > 1">s</span> selected</span>-->
+        <button class="btn btn-default pull-right" type="button" ng-click="vm.close()">Close</button>
+        <button class="btn btn-default pull-right mr-2" type="button" ng-click="vm.clear()" ng-if="!vm.options.multiple">Clear</button>
+        <button class="btn btn-primary pull-right mr-2" type="button" ng-click="vm.selectAll()" ng-if="!!vm.options.multiple">Select All</button>
+    </fieldset>
+</div>
