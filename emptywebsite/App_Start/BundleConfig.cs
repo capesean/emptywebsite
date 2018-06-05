@@ -12,14 +12,14 @@ namespace WEB
 //#endif
 
             bundles.Add(new ScriptBundle("~/scripts/login").Include(
-                "~/scripts/jquery-3.3.1.js",
+                "~/scripts/jquery-{version}.js",
                 "~/scripts/toastr.min.js"
                 ));
             
             var scriptBundle = new ScriptBundle("~/scripts/main").Include(
                 // ----- 3RD PARTY
-                "~/scripts/jquery-3.3.1.js",
-                "~/scripts/jquery-ui-1.12.1.min.js",
+                "~/scripts/jquery-{version}.js",
+                "~/scripts/jquery-ui-{version}.js",
                 "~/scripts/tether/tether.js",
                 "~/scripts/angular.js",
                 "~/scripts/angular-breadcrumb.js", // modified: bootstrap4, trimming

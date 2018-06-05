@@ -170,7 +170,6 @@
     <Content Include="app\directives\pager.html" />
     <Content Include="app\directives\selectuser.html" />
     <Content Include="app\directives\textfilereader.js" />
-    <Content Include="app\home\import.html" />
     <Content Include="app\home\index.html" />
     <Content Include="app\settings\settings.html" />
     <Content Include="app\users\changepassword.html" />
@@ -412,7 +411,6 @@
     <TypeScriptCompile Include="app\directives\pager.ts" />
     <TypeScriptCompile Include="app\directives\pagerinfo.ts" />
     <TypeScriptCompile Include="app\directives\selectuser.ts" />
-    <TypeScriptCompile Include="app\home\import.ts" />
     <TypeScriptCompile Include="app\home\index.ts" />
     <TypeScriptCompile Include="app\settings\settings.ts" />
     <TypeScriptCompile Include="app\users\changepassword.ts" />

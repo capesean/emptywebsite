@@ -24,17 +24,18 @@ namespace WEB.Controllers
 
             if (roleId != null) results = results.Where(u => u.Roles.Any(c => c.RoleId == roleId));
 
-            throw new Exception("TODO: Customise the User search/order here");
-            //if (!string.IsNullOrWhiteSpace(searchText))
-            //{
-            //    results = results.Where(u =>
-            //        u.FirstName.Contains(searchText)
-            //        || u.LastName.Contains(searchText)
-            //        || u.Email.Contains(searchText)
-            //        || (u.FirstName + " " + u.LastName).Contains(searchText));
-            //}
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                results = results.Where(u =>
+                    u.Email.Contains(searchText)
+                    //|| u.LastName.Contains(searchText)
+                    //|| u.FirstName.Contains(searchText)
+                    //|| (u.FullName).Contains(searchText)
+                    );
+            }
 
             //results = results.OrderBy(u => u.FirstName + " " + u.LastName);
+            results = results.OrderBy(u => u.Id);
 
             return Ok((await GetPaginatedResponse(results, pagingOptions)).Select(o => ModelFactory.Create(o)));
         }
@@ -147,15 +148,15 @@ namespace WEB.Controllers
         [HttpGet, Route("profile")]
         public async Task<IHttpActionResult> Profile()
         {
-            throw new Exception("TODO: Customise the User Profile here");
+            // TODO: Customise the User Profile here"
             var profile = new
             {
-                Email = CurrentUser.Email,
-                //FirstName = CurrentUser.FirstName,
-                //LastName = CurrentUser.LastName,
-                //FullName = CurrentUser.FullName,
+                CurrentUser.Email,
+                //CurrentUser.FirstName,
+                //CurrentUser.LastName,
+                //CurrentUser.FullName,
                 UserId = CurrentUser.Id,
-                Roles = CurrentUser.Roles
+                CurrentUser.Roles
             };
 
             return Ok(profile);

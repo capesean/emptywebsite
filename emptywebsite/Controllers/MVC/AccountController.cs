@@ -44,8 +44,6 @@ namespace WEB.Controllers
         [OutputCache(NoStore = true, Location = System.Web.UI.OutputCacheLocation.None)]
         public ActionResult Login()
         {
-            // todo: should check the hostname here that it exists in the current valid clients list (central database)
-            // todo: also check in other account options, such as password reset, etc. (so it doesn't create db on a request)
             return View();
         }
 

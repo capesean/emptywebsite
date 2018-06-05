@@ -14,9 +14,9 @@
 
                 <div class="col-sm-4 col-md-3">
                     <div class="form-group">
-                        <ol id="searchRole" name="searchRole" class="nya-bs-select form-control" ng-model="vm.search.roleId">
-                            <li nya-bs-option="role in vm.appSettings.roles" class="nya-bs-option" value="role.id">
-                                <a>{{role.label}}<span class="fa fa-check check-mark"></span></a>
+                        <ol id="searchRole" class="nya-bs-select form-control" ng-model="vm.search.roleId" data-live-search="true" data-size="10">
+                            <li nya-bs-option="role in vm.appSettings.roles" class="nya-bs-option dropdown-item" data-value="role.id">
+                                <a>{{role.name}}<span class="fa fa-check check-mark"></span></a>
                             </li>
                         </ol>
                     </div>
@@ -49,7 +49,7 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <div class="row" ng-class="{ 'disabled': vm.loading }">
             <div class="col-sm-7">
                 <app-pager headers="vm.headers" callback="vm.runSearch"></app-pager>
