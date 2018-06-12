@@ -124,7 +124,7 @@ namespace WEB.Controllers
                 }
             }
 
-            return Ok(ModelFactory.Create(user)); //todo: return Created(url, T) ?
+            return return await Get(user.Id);
         }
 
         [AuthorizeRoles(Roles.Administrator), HttpDelete, Route("{id:Guid}")]
