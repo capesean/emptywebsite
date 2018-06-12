@@ -3,6 +3,8 @@ using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Linq;
+using Microsoft.AspNet.Identity;
 
 namespace WEB.Controllers  
 {
@@ -56,6 +58,19 @@ namespace WEB.Controllers
         {
             Utilities.ErrorLogger.Log(filterContext.Exception, System.Web.HttpContext.Current.Request, filterContext.HttpContext.Request.Url.ToString(), filterContext.HttpContext.User.Identity.Name);
             base.OnException(filterContext);
+        }
+
+        public class AuthorizeRolesAttribute : AuthorizeAttribute
+        {
+            public AuthorizeRolesAttribute(params Roles[] roles) : base()
+            {
+                Roles = string.Join(",", roles.Select(r => r.ToString()));
+            }
+        }
+
+        internal bool CurrentUserIsInRole(Roles role)
+        {
+            return UserManager.IsInRole(CurrentUser.Id, role.ToString());
         }
     }
 }
