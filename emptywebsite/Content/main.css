@@ -75,9 +75,14 @@ body.loading {
         margin-top: 50px;
     }
 
-        body.loading #loadingSplash #logoLink img {
-            max-width: 390px;
+        body.loading #loadingSplash #logoLink {
+            padding: 0 10px;
         }
+
+            body.loading #loadingSplash #logoLink img {
+                max-width: 100%;
+                max-height: 100px;
+            }
 
 .loader {
     border: 16px solid #eaeaea;
