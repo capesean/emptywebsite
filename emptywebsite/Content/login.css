@@ -130,3 +130,12 @@ label {
         outline: none !important;
         box-shadow: none !important;
     }
+
+
+form.form-signin img {
+    max-width: 100%;
+}
+
+body#error img#logo {
+    max-height: 80px;
+}
