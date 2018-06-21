@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations;
 using DataType = System.ComponentModel.DataAnnotations.DataType;
+using System.Net.Mail;
 
 namespace WEB.Controllers
 {
@@ -80,6 +81,7 @@ namespace WEB.Controllers
             if (user != null && user.Id != userDTO.Id)
                 return BadRequest("Email address already exists.");
 
+            var password = Utilities.General.GenerateRandomPassword();
             var isNew = userDTO.Id == Guid.Empty;
 
             if (isNew)
@@ -98,7 +100,7 @@ namespace WEB.Controllers
 
             ModelFactory.Hydrate(user, userDTO);
 
-            var saveResult = (isNew ? await UserManager.CreateAsync(user) : await UserManager.UpdateAsync(user));
+            var saveResult = (isNew ? await UserManager.CreateAsync(user, password) : await UserManager.UpdateAsync(user));
 
             if (!saveResult.Succeeded)
                 return GetErrorResult(saveResult);
@@ -124,7 +126,29 @@ namespace WEB.Controllers
                 }
             }
 
-            return return await Get(user.Id);
+            if (isNew)
+            {
+                var message = new MailMessage();
+                message.To.Add(new MailAddress(user.Email));
+                message.Subject = "Account Created";
+                //message.Body = user.FirstName + Environment.NewLine;
+                //message.Body += Environment.NewLine;
+                message.Body += "A new account has been created for you on " + Settings.SiteName + "." + Environment.NewLine;
+                message.Body += Environment.NewLine;
+                message.Body += "To access the site, please login using your email address and the password below:" + Environment.NewLine;
+                message.Body += Environment.NewLine;
+                message.Body += "<strong>EMAIL/USER ID:</strong> " + user.Email + Environment.NewLine;
+                message.Body += "<strong>PASSWORD:</strong> " + password + Environment.NewLine;
+                message.Body += "<strong>LOGIN URL:</strong> " + Settings.RootUrl + "login" + Environment.NewLine;
+                message.Body += Environment.NewLine;
+                message.Body += "You may change your password once you have logged in." + Environment.NewLine;
+                message.Body += Environment.NewLine;
+                message.Body += "You can reset your password at any time, should you forget it, by following the reset link on the login page." + Environment.NewLine;
+
+                Utilities.Email.SendMail(message, Settings);
+            }
+
+            return await Get(user.Id);
         }
 
         [AuthorizeRoles(Roles.Administrator), HttpDelete, Route("{id:Guid}")]

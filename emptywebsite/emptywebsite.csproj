@@ -392,6 +392,7 @@
     <Compile Include="Utilities\Email.cs" />
     <Compile Include="Utilities\ErrorLogger.cs" />
     <Compile Include="Utilities\ExtensionMethods.cs" />
+    <Compile Include="Utilities\General.cs" />
     <Compile Include="Utilities\MachineKey.cs" />
   </ItemGroup>
   <ItemGroup>
