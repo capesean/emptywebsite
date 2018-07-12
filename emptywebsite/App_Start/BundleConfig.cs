@@ -32,7 +32,7 @@ namespace WEB
                 "~/scripts/angular-ui/ui-bootstrap-tpls.js",
                 "~/scripts/angular-local-storage.js",
                 "~/scripts/sortable.js",
-                "~/scripts/popper.js",
+                "~/scripts/umd/popper.js",
                 "~/scripts/bootstrap.js",
                 "~/scripts/moment.js",
                 "~/scripts/nya-bootstrap4-select.js",
