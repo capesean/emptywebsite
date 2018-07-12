@@ -18,9 +18,7 @@ namespace WEB.Utilities
                 smtp.Credentials = new NetworkCredential(settings.EmailUserName, settings.EmailPassword);
                 smtp.EnableSsl = settings.EmailSSL;
 
-                if (System.Web.HttpContext.Current.Request.IsLocal
-                    && !string.IsNullOrWhiteSpace(settings.SubstitutionAddress)
-                    && settings.SubstitutionAddress.IndexOf("@") > 0)
+                if (!string.IsNullOrWhiteSpace(settings.SubstitutionAddress))
                 {
                     // substitute all TO emails
                     var replacements = new List<MailAddress>();

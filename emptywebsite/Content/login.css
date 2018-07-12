@@ -1,141 +1,83 @@
-﻿:root {
-    --input-padding-x: .75rem;
-    --input-padding-y: .75rem;
-}
-
-html {
-    font-size: 10.5pt;
-}
-
-html,
+﻿html,
 body {
     height: 100%;
 }
 
-    body#error {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-    }
-
-    body:not(#error) {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-align: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-    }
+body {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
 
 .form-signin {
     width: 100%;
-    max-width: 420px;
+    max-width: 330px;
     padding: 15px;
     margin: 0 auto;
 }
 
-body#error #errorContent {
-    border: solid 1px #ccc;
-    background-color: white;
-    padding: 20px 40px 40px;
-    margin-bottom: 100px;
-    border-radius: 5px;
-}
-
-.form-label-group {
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-    .form-label-group > input,
-    .form-label-group > label {
-        padding: var(--input-padding-y) var(--input-padding-x);
+    .form-signin .checkbox {
+        font-weight: 400;
     }
 
-    .form-label-group > label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        margin-bottom: 0; /* Override default `<label>` margin */
-        line-height: 1.5;
-        color: #495057;
-        border: 1px solid transparent;
-        border-radius: .25rem;
-        transition: all .1s ease-in-out;
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
     }
 
-    .form-label-group input::-webkit-input-placeholder {
-        color: transparent;
-    }
-
-    .form-label-group input:-ms-input-placeholder {
-        color: transparent;
-    }
-
-    .form-label-group input::-ms-input-placeholder {
-        color: transparent;
-    }
-
-    .form-label-group input::-moz-placeholder {
-        color: transparent;
-    }
-
-    .form-label-group input::placeholder {
-        color: transparent;
-    }
-
-    .form-label-group input:not(:placeholder-shown) {
-        padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
-        padding-bottom: calc(var(--input-padding-y) / 3);
-    }
-
-        .form-label-group input:not(:placeholder-shown) ~ label {
-            padding-top: calc(var(--input-padding-y) / 3);
-            padding-bottom: calc(var(--input-padding-y) / 3);
-            font-size: 12px;
-            color: #777;
+        .form-signin .form-control:focus {
+            z-index: 2;
         }
 
-label {
-    user-select: none;
+#login.form-signin input[type="email"], #reset.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
-.login-top input {
-    border-bottom-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
+#login.form-signin input[type="password"], #reset.form-signin input#ConfirmPassword[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
-.login-middle input {
-    border-radius: 0 !important;
-    margin-top: -1px;
+#reset.form-signin input#Password[type="password"] {
+    border-radius: 0;
+    margin-bottom: -1px;
 }
 
-.login-bottom input {
-    border-top-right-radius: 0 !important;
-    border-top-left-radius: 0 !important;
-    margin-top: -1px;
+.form-signin img {
+    width: 100%;
 }
 
-    .login-top input:focus,
-    .login-middle input:focus,
-    .login-bottom input:focus {
-        outline: none !important;
-        box-shadow: none !important;
+body#error {
+    padding-top: 0;
+}
+
+    body#error img {
+        max-height: 155px;
+        display: block;
+        margin: 0 auto;
     }
 
+    body#error #errorbody {
+        background: white;
+        padding: 10px 10px 0;
+        border: solid 1px #999;
+    }
 
-form.form-signin img {
-    max-width: 100%;
-}
-
-body#error img#logo {
-    max-height: 80px;
+#toast-container * {
+    line-height: 1.2em;
 }

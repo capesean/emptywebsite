@@ -84,8 +84,7 @@ namespace WEB
 
             bundles.Add(new StyleBundle("~/content/error").Include(
                 "~/content/bootstrap.min.css",
-                "~/content/login.css",
-                "~/content/main.css"
+                "~/content/login.css"
                 ));
 
             bundles.Add(new StyleBundle("~/content/main").Include(
