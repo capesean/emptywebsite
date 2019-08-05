@@ -59,7 +59,7 @@ body {
 }
 
 .form-signin img {
-    width: 100%;
+    max-width: 100%;
 }
 
 body#error {

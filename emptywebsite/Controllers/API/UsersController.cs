@@ -161,16 +161,13 @@ namespace WEB.Controllers
             if (user == null)
                 return NotFound();
 
-            //if (DbContext.Indicators.Any(o => o.LastSavedById == id || o.CreatedById == id))
-            //    return BadRequest("Unable to delete the user as he/she is the owner of one or more reports");
-
             await UserManager.DeleteAsync(user);
 
             return Ok();
         }
 
         [HttpGet, Route("profile")]
-        public async Task<IHttpActionResult> Profile()
+        public IHttpActionResult Profile()
         {
             // TODO: Customise the User Profile here"
             var profile = new

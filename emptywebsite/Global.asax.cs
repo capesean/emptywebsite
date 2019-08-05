@@ -17,6 +17,19 @@ namespace WEB
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new AntiForgeryTokenFilter());
+        }
+
+        public class AntiForgeryTokenFilter : FilterAttribute, IExceptionFilter
+        {
+            public void OnException(ExceptionContext filterContext)
+            {
+                if (filterContext.Exception.GetType() == typeof(HttpAntiForgeryException))
+                {
+                    filterContext.Result = new RedirectResult("/logout");
+                    filterContext.ExceptionHandled = true;
+                }
+            }
         }
 
         protected void Application_BeginRequest()
